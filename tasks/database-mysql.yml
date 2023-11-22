@@ -5,6 +5,9 @@
     name: "{{ pdns_mysql_packages }}"
     state: present
 
+- debug:
+    msg: "{{ pdns_backends | combine(pdns_mysql_databases_credentials, recursive=True) |dict2items }}"
+
 - name: Create the PowerDNS MySQL databases
   mysql_db:
     login_user: "{{ item['value']['priv_user'] }}"
