@@ -14,7 +14,6 @@
     name: "{{ item['value']['dbname'] }}"
     state: present
   when: "item.key.split(':')[0] == 'gmysql'"
-  no_log: True
   loop: "{{ pdns_backends | combine(pdns_mysql_databases_credentials, recursive=True) |dict2items }}"
 
 - name: Grant PowerDNS access to the MySQL databases
