@@ -25,6 +25,10 @@
     state: present
   when: pdns_install_debug_symbols_package
 
+- name: "Ansible | Print a variable"
+  debug:
+    msg: "{{ pdns_backends|dict2items }}"
+
 - name: Install PowerDNS backends
   package:
     name: "{{ pdns_backends_packages[item.key.split(':')[0]] }}{{ _pdns_package_version | default('') }}"
